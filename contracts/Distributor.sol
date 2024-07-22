@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "./MedicineSupplyChain.sol";
+import "./FoodSupplyChain.sol";
 
 contract Distributor {
-    MedicineSupplyChain public supplyChain;
+    FoodSupplyChain public supplyChain;
 
     constructor(address _supplyChainAddress) {
-        supplyChain = MedicineSupplyChain(_supplyChainAddress);
+        supplyChain = FoodSupplyChain(_supplyChainAddress);
     }
 
     function purchaseTokens(
@@ -31,19 +31,19 @@ contract Distributor {
         supplyChain.withDraw(_amount);
     }
 
-    //Purchase Medicine from Manufacturer
-    function purchaseMedicine(
+    //Purchase Food from Manufacturer
+    function purchaseFood(
         string memory _name,
         uint256 _lotNumber
     ) public {
-        supplyChain.purchaseMedicineLot(
+        supplyChain.purchaseFoodLot(
             _name,
             _lotNumber
             );
     }
 
     //sendReturnRequest to Manufacturer by Distributor
-    function returnMedicine (
+    function returnFood (
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity
@@ -65,7 +65,7 @@ contract Distributor {
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity, 
-        address _pharmacy
+        address _Food
     ) public {
         require(
             _quantity > 0,
@@ -73,24 +73,24 @@ contract Distributor {
         );
 
         require(
-            _pharmacy != address(0),
+            _Food!= address(0),
             "Invalid Return Consumer Address"
         );
 
-          supplyChain.returnMedicinebyDistributor(
+          supplyChain.returnFoodbyDistributor(
             _name, 
             _lotNumber, 
             _quantity, 
-            _pharmacy
+            _Food
             );  
 
     }
 
-    function addPharmacy(
-        address _pharmacy
+    function addFood(
+        address _Food
         ) public {
 
-       supplyChain.addValidPharmacy(_pharmacy);
+       supplyChain.addValidFood(_Food);
     }
     
 }

@@ -47,7 +47,7 @@ export const feedback = [
   {
     id: "feedback-1",
     content:
-      "Exceptional service! I was amazed at how easy and quick it was to order my medications. Definitely my go-to pharmacy from now on",
+      "Exceptional service! I was amazed at how easy and quick it was to order my medications. Definitely my go-to Foodfrom now on",
     name: "Sarah  M",
     title: "Founder & Leader",
     img: people01,
@@ -55,7 +55,7 @@ export const feedback = [
   {
     id: "feedback-2",
     content:
-      "The transparency in the supply chain is a game-changer. Knowing exactly where my medicine comes from gives me peace of mind.",
+      "The transparency in the supply chain is a game-changer. Knowing exactly where my Food comes from gives me peace of mind.",
     name: "John D",
     title: "Founder & Leader",
     img: people02,

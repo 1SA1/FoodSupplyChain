@@ -11,7 +11,7 @@ const Hero = () => {
           <p className={`${styles.paragraph} ml-2`}>
             <span className='text-white' >Empowering </
             span> Healthcare, {" "}
-            <span className='text-white' >Drug</
+            <span className='text-white' >Food</
             span> Store
           </p>
         </div>
@@ -27,9 +27,9 @@ const Hero = () => {
             <GetStarted />
           </div>
         </div>
-        <h1 className='flex-1 font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>  Drug Store.</h1>
+        <h1 className='flex-1 font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100px] leading-[75px] w-full'>  Food Store.</h1>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-        Welcome to the future of healthcare supply chain management. Our DApp is designed to streamline the distribution of vital medical supplies, ensuring they reach the right hands precisely when needed. 
+        Welcome to the future of healthcare supply chain management. Our DApp is designed to streamline the distribution of vital Food supplies, ensuring they reach the right hands precisely when needed. 
         </p>
 
       </div>

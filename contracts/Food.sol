@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./MedicineSupplyChain.sol";
+import "./FoodSupplyChain.sol";
 
-contract Pharmacy {
-    MedicineSupplyChain public supplyChain;
+contract Food{
+    FoodSupplyChain public supplyChain;
 
     constructor(address _supplyChainAddress) {
-        supplyChain = MedicineSupplyChain(_supplyChainAddress);
+        supplyChain = FoodSupplyChain(_supplyChainAddress);
     }
 
     function purchaseTokens(
@@ -32,8 +32,8 @@ contract Pharmacy {
         supplyChain.withDraw(_amount);
     }
 
-    //Purchase Medicine from Distributor
-    function purchaseMedicine(
+    //Purchase Food from Distributor
+    function purchaseFood(
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity,
@@ -41,7 +41,7 @@ contract Pharmacy {
     ) public {
         require(
             _quantity > 0,
-            "Invalid Purhase Quantity by Pharmacy"
+            "Invalid Purhase Quantity by Food"
         );
 
         supplyChain.purchaseFromDistributor(
@@ -52,8 +52,8 @@ contract Pharmacy {
         );
     }
 
-    //sendReturnRequest to Distributor by Pharmacy
-    function returnMedicine (
+    //sendReturnRequest to Distributor by Food
+    function returnFood (
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity,
@@ -88,7 +88,7 @@ contract Pharmacy {
             "Invalid Return Consumer Address"
         );
 
-          supplyChain.returnMedicinebyPharmacy(
+          supplyChain.returnFoodbyFood(
             _name, 
             _lotNumber, 
             _quantity, 

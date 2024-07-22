@@ -1,11 +1,22 @@
-const manufacturerContract ="0xD992B8B74554f92C483E3f91731DCfaDAb6e3832";
-const distributorContract = "0x24AA73Ad4E3E87842B508b7126D8FFc5158010f5";
-const pharmacyContract = "0xf88Eb459A84cd54BacC0F733fee145c172302C89";
-const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
+const manufacturerContract ="0x8E3b0a422A56F7184aac44632c0485dcd7FfA18f";
+const distributorContract = "0xeCB0543c83883b435D519E996F48161f9b7F30ab";
+const foodContract = "0x20AEa4bcAA7B235edc3D600A5FeFf051866580c2";
+const consumerContract ="0xD79fc2720b45b2DAdE9D7fFfBD6C1f75ACD439AB";
 
 //ABI
 
   const manufacturerABI = [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_supplyChainAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
     {
       "inputs": [
         {
@@ -72,7 +83,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
           "type": "uint256"
         }
       ],
-      "name": "addMedicine",
+      "name": "addFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -127,22 +138,11 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_supplyChainAddress",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
       "inputs": [],
       "name": "supplyChain",
       "outputs": [
         {
-          "internalType": "contract MedicineSupplyChain",
+          "internalType": "contract FoodSupplyChain",
           "name": "",
           "type": "address"
         }
@@ -155,7 +155,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "name": "token",
       "outputs": [
         {
-          "internalType": "contract MedicineToken",
+          "internalType": "contract FoodToken",
           "name": "",
           "type": "address"
         }
@@ -195,7 +195,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
         },
         {
           "internalType": "address",
-          "name": "_pharmacy",
+          "name": "_Food",
           "type": "address"
         }
       ],
@@ -208,11 +208,11 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "inputs": [
         {
           "internalType": "address",
-          "name": "_pharmacy",
+          "name": "_Food",
           "type": "address"
         }
       ],
-      "name": "addPharmacy",
+      "name": "addFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -230,7 +230,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
           "type": "uint256"
         }
       ],
-      "name": "purchaseMedicine",
+      "name": "purchaseFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -266,7 +266,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
           "type": "uint256"
         }
       ],
-      "name": "returnMedicine",
+      "name": "returnFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -289,7 +289,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "name": "supplyChain",
       "outputs": [
         {
-          "internalType": "contract MedicineSupplyChain",
+          "internalType": "contract FoodSupplyChain",
           "name": "",
           "type": "address"
         }
@@ -329,11 +329,11 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
         },
         {
           "internalType": "address",
-          "name": "_pharmacy",
+          "name": "_Food",
           "type": "address"
         }
       ],
-      "name": "purchaseMedicine",
+      "name": "purchaseFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -370,11 +370,11 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
         },
         {
           "internalType": "address",
-          "name": "_pharmacy",
+          "name": "_Food",
           "type": "address"
         }
       ],
-      "name": "returnMedicine",
+      "name": "returnFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -397,7 +397,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "name": "supplyChain",
       "outputs": [
         {
-          "internalType": "contract MedicineSupplyChain",
+          "internalType": "contract FoodSupplyChain",
           "name": "",
           "type": "address"
         }
@@ -419,11 +419,11 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
         },
         {
           "internalType": "address",
-          "name": "_pharmacy",
+          "name": "_Food",
           "type": "address"
         }
       ],
-      "name": "verifyMedicine",
+      "name": "verifyFood",
       "outputs": [
         {
           "internalType": "bool",
@@ -435,7 +435,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "type": "function"
     }
   ]
-  const pharmacyABI = [
+  const foodABI = [
     {
       "inputs": [
         {
@@ -498,7 +498,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
           "type": "address"
         }
       ],
-      "name": "purchaseMedicine",
+      "name": "purchaseFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -539,7 +539,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
           "type": "address"
         }
       ],
-      "name": "returnMedicine",
+      "name": "returnFood",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -562,7 +562,7 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "name": "supplyChain",
       "outputs": [
         {
-          "internalType": "contract MedicineSupplyChain",
+          "internalType": "contract FoodSupplyChain",
           "name": "",
           "type": "address"
         }
@@ -571,5 +571,5 @@ const consumerContract ="0xc8B0010987c499ec01cB71994Bf76CBEBFd00750";
       "type": "function"
     }
   ]
-export default {  manufacturerContract,distributorContract,pharmacyContract,consumerContract,
-    manufacturerABI, distributorABI, pharmacyABI, consumerABI};
+export default {  manufacturerContract,distributorContract,foodContract,consumerContract,
+    manufacturerABI, distributorABI, foodABI, consumerABI};

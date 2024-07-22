@@ -6,7 +6,7 @@ const CTA = () => (
     <div className="flex-1 flex flex-col">
       <h2 className={styles.heading2}>Let’s try our service now!</h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-      Absolutely! We're excited to have you experience our exceptional service. Whether you're looking to purchase essential medicines
+      Absolutely! We're excited to have you experience our exceptional service. Whether you're looking to purchase essential Foods
       </p>
     </div>
 

@@ -34,3 +34,6 @@ typechain-types
 cache
 artifacts
 
+.firebaserc
+.firebase.json
+.firebase

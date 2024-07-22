@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./MedicineSupplyChain.sol";
+import "./FoodSupplyChain.sol";
 
 contract Consumer {
-    MedicineSupplyChain public supplyChain;
+    FoodSupplyChain public supplyChain;
 
     constructor(address _supplyChainAddress) {
-        supplyChain = MedicineSupplyChain(_supplyChainAddress);
+        supplyChain = FoodSupplyChain(_supplyChainAddress);
     }
 
     function purchaseTokens(
@@ -31,45 +31,45 @@ contract Consumer {
         supplyChain.withDraw(_amount);
     }
 
-    function verifyMedicine (
+    function verifyFood (
         string memory _name, 
         uint256 _lotNumber, 
-        address _pharmacy
+        address _Food
         ) public returns(bool) {
         
-        return supplyChain.verifyMedicine(
+        return supplyChain.verifyFood(
             _name,
             _lotNumber,
-            _pharmacy
+            _Food
             );
     }
 
-    //Purchase Medicine from Pharmacy
-    function purchaseMedicine(
+    //Purchase Food from Food
+    function purchaseFood(
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity,
-        address _pharmacy
+        address _Food
     ) public {
         require(
             _quantity > 0, 
             "Invalid Purchase Quantity"
         );
 
-        supplyChain.purchaseFromPharmacy(
+        supplyChain.purchaseFromFood(
             _name,
             _lotNumber,
             _quantity,
-            _pharmacy
+            _Food
             );
     }
 
-    //sendReturnRequest to Pharmacy by Consumer
-    function returnMedicine (
+    //sendReturnRequest to Foodby Consumer
+    function returnFood (
         string memory _name,
         uint256 _lotNumber,
         uint256 _quantity, 
-        address _pharmacy
+        address _Food
     ) public {
         require(
             _quantity > 0, 
@@ -77,15 +77,15 @@ contract Consumer {
         );
 
         require(
-            _pharmacy!=address(0),
-            "Invalid Pharmacy Address"
+            _Food!=address(0),
+            "Invalid FoodAddress"
         );
 
         supplyChain.sendReturnRequest(
             _name, 
             _lotNumber, 
             _quantity, 
-            _pharmacy
+            _Food
             );
     }
     //No Need here because Approval will be done at time of purchase for the exact amount of tokens

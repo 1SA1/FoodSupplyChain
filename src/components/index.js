@@ -12,7 +12,7 @@ import Constants from "./Constants";
 import Consumer from "./Consumer";
 import Distributor from "./Distributor";
 import Manufacturer from "./Manufacturer";
-import Pharmacy from "./Pharmacy";
+import Food from "./Food";
 import ToastMessage from "./ToastMessage";
 import Button from "./Button";
 
@@ -31,7 +31,7 @@ export {
   Consumer,
   Distributor,
   Manufacturer,
-  Pharmacy,
+  Food,
   ToastMessage,
   Button
 };

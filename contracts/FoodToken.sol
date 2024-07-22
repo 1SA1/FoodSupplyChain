@@ -5,10 +5,10 @@ pragma solidity ^0.8.21;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
-contract MedicineToken is ERC20 {
+contract FoodToken is ERC20 {
     address public owner;
 
-    constructor() ERC20("MedicineToken", "MT") {
+    constructor() ERC20("FoodToken", "MT") {
         owner = msg.sender;
     
     }

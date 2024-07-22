@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "./MedicineSupplyChain.sol";
-import "./MedicineToken.sol";
+import "./FoodSupplyChain.sol";
+import "./FoodToken.sol";
 
 contract Manufacturer {
-    MedicineSupplyChain public supplyChain;
-    MedicineToken public token;
+    FoodSupplyChain public supplyChain;
+    FoodToken public token;
 
     constructor(address _supplyChainAddress) {
-        supplyChain = MedicineSupplyChain(_supplyChainAddress);
+        supplyChain = FoodSupplyChain(_supplyChainAddress);
     }
 
     function mintTokens(uint _amount)  public {
@@ -21,7 +21,7 @@ contract Manufacturer {
         supplyChain.mintTokens(_amount);
     }
 
-    function addMedicine(
+    function addFood(
         string memory _name,
         uint256 _lotNumber,
         uint8 _cat,
@@ -30,7 +30,7 @@ contract Manufacturer {
         uint256 _dateOfProduction,
         uint256 _dateofExpiry ) public {
 
-        supplyChain.addMedicine(
+        supplyChain.addFood(
             _name, 
             _lotNumber,
             _cat, 
@@ -46,7 +46,7 @@ contract Manufacturer {
         uint256 _lotNumber,
         uint256 _quantity
         )  public {
-       supplyChain.destroyMedicine(_name, _lotNumber, _quantity);
+       supplyChain.destroyFood(_name, _lotNumber, _quantity);
     }
 
     function acceptReturn (
@@ -65,7 +65,7 @@ contract Manufacturer {
             "Invalid Return Consumer Address"
         );
 
-          supplyChain.returnMedicinebyManufacturer(
+          supplyChain.returnFoodbyManufacturer(
             _name, 
             _lotNumber, 
             _quantity, 

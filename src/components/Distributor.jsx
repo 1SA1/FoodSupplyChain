@@ -1,15 +1,15 @@
 import React, { useState,useEffect } from "react";
 import ToastMessage from "./ToastMessage";
 import { Button, Modal, Tabs, Input, Tooltip, InputNumber } from 'antd';
-import { InfoCircleOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, AppleOutlined } from '@ant-design/icons';
 
 const Distributor = ({ web3Config }) => {
-  const [medicineName, setMedicineName] = useState("");
+  const [FoodName, setFoodName] = useState("");
   const [lotNumber, setLotNumber] = useState(0);
   const [amount, setamount] = useState(0);
   const [account, setAccount] = useState(0);
   const [mint, setMint] = useState(0);
-  const [returnMedicineName,setReturnMedicineName] = useState(0);
+  const [returnFoodName,setReturnFoodName] = useState(0);
   const [returnLotNumber,setReturnLotNumber] = useState(0);
   const [returnReturnQuantity,setReturnQuantity] = useState(0);
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ const Distributor = ({ web3Config }) => {
   const [returnMedName, setreturnMedName] = useState();
   const [returnMedLotNumber, setreturnLotNumber] = useState();
   const [returnQuantity, setreturnQuantity] = useState();
-  const [returnPharmacyAdd, setreturnPharmacyAdd] = useState();
+  const [returnFoodAdd, setreturnFoodAdd] = useState();
 
   useEffect(() => {
     showModal();
@@ -41,43 +41,43 @@ const Distributor = ({ web3Config }) => {
     setOpen(false);
   };
 
-  const purchaseMedicine = async () => {
-    if (!medicineName ||  lotNumber < 0) {
+  const purchaseFood = async () => {
+    if (!FoodName ||  lotNumber < 0) {
       ToastMessage("Failed", "Please fill in all fields", "error");
       return;
     }
-    const receipt = await web3Config.distributorContract.methods.purchaseMedicine(medicineName, lotNumber).send({ from: web3Config.account, gas: 3000000 });
+    const receipt = await web3Config.distributorContract.methods.purchaseFood(FoodName, lotNumber).send({ from: web3Config.account, gas: 3000000 });
     if (receipt.status) {
-      ToastMessage("Sucess", "Medicine Purchased", "success");
+      ToastMessage("Sucess", "Food Purchased", "success");
     } else {
-      ToastMessage("Failed", "Medicine not Purchased", "error");
+      ToastMessage("Failed", "Food not Purchased", "error");
     }
   };
 
-  const returnMedicine = async () => {
-    if (!returnMedicineName || returnLotNumber <= 0 || returnReturnQuantity <= 0) {
+  const returnFood = async () => {
+    if (!returnFoodName || returnLotNumber <= 0 || returnReturnQuantity <= 0) {
       ToastMessage("Failed", "Please fill in all fields", "error");
       return;
     }
-    const receipt = await await web3Config.distributorContract.methods.returnMedicine(returnMedicineName, returnLotNumber, returnReturnQuantity).send({ from: web3Config.account, gas: 3000000 });
+    const receipt = await await web3Config.distributorContract.methods.returnFood(returnFoodName, returnLotNumber, returnReturnQuantity).send({ from: web3Config.account, gas: 3000000 });
     if (receipt.status) {
-      ToastMessage("Sucess", "Medicine Returned", "success");
+      ToastMessage("Sucess", "Food Returned", "success");
     } else {
-      ToastMessage("Failed", "Medicine not Returned", "error");
+      ToastMessage("Failed", "Food not Returned", "error");
     }
   };
 
-  const addValidPharmacy = async () => {
+  const addValidFood= async () => {
     if (!account) {
-      ToastMessage("Failed", "Please fill in the Pharmacy Address field", "error");
+      ToastMessage("Failed", "Please fill in the FoodAddress field", "error");
       return;
     }
     console.log(web3Config)
-    const receipt = await web3Config.distributorContract.methods.addPharmacy(account).send({ from: web3Config.account, gas: 3000000 });
+    const receipt = await web3Config.distributorContract.methods.addFood(account).send({ from: web3Config.account, gas: 3000000 });
     if (receipt.status) {
-      ToastMessage("Sucess", "Medicine Returned", "success");
+      ToastMessage("Sucess", "Foodadded", "success");
     } else {
-      ToastMessage("Failed", "Medicine not Returned", "error");
+      ToastMessage("Failed", "Food not Returned", "error");
     }
   };
 
@@ -89,19 +89,19 @@ const Distributor = ({ web3Config }) => {
     console.log(web3Config)
     const receipt = await web3Config.distributorContract.methods.purchaseTokens(mint).send({ from: web3Config.account,value: mint });
     if (receipt.status) {
-      ToastMessage("Sucess", "Medicine Returned", "success");
+      ToastMessage("Sucess", "Food Returned", "success");
     } else {
-      ToastMessage("Failed", "Medicine not Returned", "error");
+      ToastMessage("Failed", "Food not Returned", "error");
     }
   };
 
     //Accept Return
     const acceptReturn = async () => {
-      if (!returnMedName || returnMedLotNumber <= 0 || returnQuantity <= 0 || !returnPharmacyAdd) {
+      if (!returnMedName || returnMedLotNumber <= 0 || returnQuantity <= 0 || !returnFoodAdd) {
         ToastMessage("Failed", "Please fill in all fields", "error");
         return;
       }
-      const acceptReturn = await web3Config.distributorContract.methods.acceptReturn(returnMedName,returnMedLotNumber,returnQuantity,returnPharmacyAdd).send({ from: web3Config.account });
+      const acceptReturn = await web3Config.distributorContract.methods.acceptReturn(returnMedName,returnMedLotNumber,returnQuantity,returnFoodAdd).send({ from: web3Config.account });
       if (acceptReturn.status) {
         ToastMessage("Sucess", "Distributor Valid", "success");
       } else {
@@ -136,14 +136,14 @@ const Distributor = ({ web3Config }) => {
         okButtonProps={{ style: { backgroundColor: '#4096ff', borderColor: '#4096ff80', color: '#FFFFFF' } }}
       >
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="Add Medicine" key="1">
+          <Tabs.TabPane tab="Add Food" key="1">
             <div>
-              <Input className="mb-2" type="text" value={medicineName} onChange={(e) => setMedicineName(e.target.value)}
-                placeholder="Enter Medicine Name"
+              <Input className="mb-2" type="text" value={FoodName} onChange={(e) => setFoodName(e.target.value)}
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',
@@ -155,27 +155,27 @@ const Distributor = ({ web3Config }) => {
 
 
 
-              <InputNumber className="mb-2" type="number" value={lotNumber} onChange={(e) => setLotNumber(e.target.value)} addonBefore="Lot #" />
+              <InputNumber className="mb-2" type="number" value={lotNumber}    onChange={value => setLotNumber(value)} addonBefore="Lot #" />
 
 
 
           
 
 
-              <Button type="dashed" onClick={purchaseMedicine} danger>
-                Purchase Medicine
+              <Button type="dashed" onClick={purchaseFood} danger>
+                Purchase Food
               </Button>
             </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Return Medicine" key="2">
+          <Tabs.TabPane tab="Return Food" key="2">
             <div>
-          <Input className="mb-2" t value={returnMedicineName}
-              onChange={(e) => setReturnMedicineName(e.target.value)}
-                placeholder="Enter Medicine Name"
+          <Input className="mb-2" t value={returnFoodName}
+              onChange={(e) => setReturnFoodName(e.target.value)}
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',
@@ -195,17 +195,17 @@ const Distributor = ({ web3Config }) => {
               placeholder="Quantity"
               value={returnReturnQuantity}
               onChange={value => setReturnQuantity(value)} addonBefore="Quantity"   />
-          <Button type="dashed" onClick={returnMedicine} danger>
-          Return Medicine
+          <Button type="dashed" onClick={returnFood} danger>
+          Return Food
               </Button>
               </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Add Pharmacy" key="3">
+          <Tabs.TabPane tab=" Add Food" key="3">
             <div>
           
             <Input className="mb-2" value={account} onChange={(e) => setAccount(e.target.value)}  addonBefore="Acc #"   />
-            <Button type="dashed" onClick={addValidPharmacy} danger>
-            Add Valid Pharmacy
+            <Button type="dashed" onClick={addValidFood} danger>
+            Add Valid Food
               </Button>
             </div>
           </Tabs.TabPane>
@@ -221,11 +221,11 @@ const Distributor = ({ web3Config }) => {
             <div>
 
               <Input className="mb-2" type="text" value={returnMedName} onChange={(e) => setreturnMedName(e.target.value)}
-                placeholder="Enter Medicine Name"
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',
@@ -243,7 +243,7 @@ const Distributor = ({ web3Config }) => {
 
               <InputNumber className="mb-2"  value={returnQuantity} onChange={value => setreturnQuantity(value)} addonBefore="Quantity"   />
 
-              <Input className="mb-2"  value={returnPharmacyAdd} onChange={(e) => setreturnPharmacyAdd(e.target.value)}  addonBefore="Acc #"   />
+              <Input className="mb-2"  value={returnFoodAdd} onChange={(e) => setreturnFoodAdd(e.target.value)}  addonBefore="Acc #"   />
             
               <Button type="dashed" onClick={acceptReturn} danger>
                 Accept Return

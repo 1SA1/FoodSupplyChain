@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ToastMessage from "./ToastMessage";
 import { Button, Modal, DatePicker, Tabs,Input, Tooltip,InputNumber, Select } from 'antd';
-import { InfoCircleOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, AppleOutlined } from '@ant-design/icons';
 
 
 const { TabPane } = Tabs;
@@ -48,8 +48,8 @@ const Manufacturer = ({ web3Config }) => {
     setOpen(false);
   };
 
-  // Add medicine
-  const addMedicine = async () => {
+  // Add Food
+  const addFood = async () => {
     try {
       if (!name || !lotNumber || !cat || !quantity || !price || !dateOfProduction || !dateofExpiry) {
         ToastMessage("Error", "Please fill in all fields", "error");
@@ -69,11 +69,11 @@ console.log(price);
 console.log(dateOfProductionUnix);
 console.log(dateofExpiryUnix);
       const receipt = await web3Config.manufacturerContract
-      .methods.addMedicine(name, lotNumber, cat, quantity, price, dateOfProductionUnix, dateofExpiryUnix).send({ from: web3Config.account});
+      .methods.addFood(name, lotNumber, cat, quantity, price, dateOfProductionUnix, dateofExpiryUnix).send({ from: web3Config.account, gas: 3000000});
       if (receipt.status) {
-        ToastMessage("Sucess", "Medicine Added", "success");
+        ToastMessage("Sucess", "Food Added", "success");
       } else {
-        ToastMessage("Failed", "Medicine not Added", "error");
+        ToastMessage("Failed", "Food not Added", "error");
       }
     } catch (error) {
       console.error(error);
@@ -98,8 +98,8 @@ console.log(dateofExpiryUnix);
     }
   };
 
-  // Destroy medicine
-  const destroyMedicine = async () => {
+  // Destroy Food
+  const destroyFood = async () => {
     if (!destoryMedName || !destoryMedLotNumber || !destroyQuantity) {
       ToastMessage("Error", "Please fill in all fields", "error");
       return;
@@ -107,9 +107,9 @@ console.log(dateofExpiryUnix);
     console.log(web3Config)
     const receipt = await web3Config.manufacturerContract.methods.destroyMed(destoryMedName, destoryMedLotNumber, destroyQuantity).send({ from: web3Config.account });
     if (receipt.status) {
-      ToastMessage("Sucess", "Medicine Destroyed", "success");
+      ToastMessage("Sucess", "Food Destroyed", "success");
     } else {
-      ToastMessage("Failed", "Medicine not Destroyed", "error");
+      ToastMessage("Failed", "Food not Destroyed", "error");
     }
   };
 
@@ -120,7 +120,7 @@ console.log(dateofExpiryUnix);
       ToastMessage("Error", "Please fill in all fields", "error");
       return;
     }
-    const isValidDistributor = await web3Config.manufacturerContract.methods.addValidDistributor(account).send({ from: web3Config.account });
+    const isValidDistributor = await web3Config.manufacturerContract.methods.addValidDistributor(account).send({ from: web3Config.account , gas: 3000000 });
     if (isValidDistributor.status) {
       ToastMessage("Sucess", "Distributor Valid", "success");
     } else {
@@ -158,15 +158,15 @@ console.log(dateofExpiryUnix);
         okButtonProps={{ style: { backgroundColor: '#4096ff', borderColor: '#4096ff80', color: '#FFFFFF' } }}
       >
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="Add Medicine" key="1">
+          <Tabs.TabPane tab="Add Food" key="1">
             <div>
 
               <Input className="mb-2" type="text" value={name}  onChange={(e) => setName(e.target.value)}
-                placeholder="Enter Medicine Name"
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',
@@ -202,8 +202,8 @@ console.log(dateofExpiryUnix);
                 <Option value="4">Life Saving</Option>
               </Select>
               <br />
-              <Button type="dashed" onClick={addMedicine} danger>
-                Add Medicine
+              <Button type="dashed" onClick={addFood} danger>
+                Add Food
               </Button>
 
             </div>
@@ -217,15 +217,15 @@ console.log(dateofExpiryUnix);
               </Button>
             </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Destory Medcine" key="3">
+          <Tabs.TabPane tab="Destory Food" key="3">
             <div>
           
               <Input className="mb-2" type="text" value={destoryMedName}  onChange={(e) => setDestoryMedName(e.target.value)}
-                placeholder="Enter Medicine Name"
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',
@@ -241,7 +241,7 @@ console.log(dateofExpiryUnix);
 
 
               <InputNumber className="mb-2" type="number" value={destroyQuantity}  onChange={value => setDestroyQuantity(value)} addonBefore="Quantity"  />
-              <Button type="dashed" onClick={destroyMedicine} danger> Destroy Medcine
+              <Button type="dashed" onClick={destroyFood} danger> Destroy Food
               </Button>
             </div>
           </Tabs.TabPane>
@@ -258,11 +258,11 @@ console.log(dateofExpiryUnix);
             <div>
 
               <Input className="mb-2" type="text" value={returnMedName} onChange={(e) => setreturnMedName(e.target.value)}
-                placeholder="Enter Medicine Name"
+                placeholder="Enter Food Name"
 
-                prefix={<MedicineBoxOutlined className="site-form-item-icon" />}
+                prefix={<AppleOutlined className="site-form-item-icon" />}
                 suffix={
-                  <Tooltip title="Medicine name that help user to identify product">
+                  <Tooltip title="Food name that help user to identify product">
                     <InfoCircleOutlined
                       style={{
                         color: 'rgba(0,0,0,.45)',

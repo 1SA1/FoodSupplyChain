@@ -22,7 +22,7 @@ const Business = () =>  (
   <section id="features" className={layout.section}>
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
-      Empower Your Pharmacy with Next-Gen, <br className="sm:block hidden" />  Supply Chain Solutions
+      Empower Your Foodwith Next-Gen, <br className="sm:block hidden" />  Supply Chain Solutions
       </h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
       Harnessing blockchain technology, we guarantee transparency, traceability, and security in every step of the process. Join us in reshaping the way the world accesses life-saving medications, making a tangible impact on healthcare delivery globally.

@@ -8,47 +8,47 @@ const hre = require("hardhat");
 require("@nomicfoundation/hardhat-toolbox")
 async function main() {
 
-  const medicineToken = await hre.ethers.deployContract("MedicineToken");
-  const medicineSupplyChain = await hre.ethers.deployContract("MedicineSupplyChain",[medicineToken.target]);
-  const manufacturer = await hre.ethers.deployContract("Manufacturer",[medicineSupplyChain.target]);
-  const distributor = await hre.ethers.deployContract("Distributor",[medicineSupplyChain.target]);
-  const pharmacy = await hre.ethers.deployContract("Pharmacy",[medicineSupplyChain.target]);
-  const consumer = await hre.ethers.deployContract("Consumer",[medicineSupplyChain.target]);
+  const FoodToken = await hre.ethers.deployContract("FoodToken");
+  const FoodSupplyChain = await hre.ethers.deployContract("FoodSupplyChain",[FoodToken.target]);
+  const manufacturer = await hre.ethers.deployContract("Manufacturer",[FoodSupplyChain.target]);
+  const distributor = await hre.ethers.deployContract("Distributor",[FoodSupplyChain.target]);
+  const Food= await hre.ethers.deployContract("Food",[FoodSupplyChain.target]);
+  const consumer = await hre.ethers.deployContract("Consumer",[FoodSupplyChain.target]);
 
-  await medicineToken.waitForDeployment();
+  await FoodToken.waitForDeployment();
 //Contract Address
-  console.log(`MedicineToken deployed to ${medicineToken.target}`);
-  console.log(`MedicineSupplyChain deployed to ${medicineSupplyChain.target}`);
+  console.log(`FoodToken deployed to ${FoodToken.target}`);
+  console.log(`FoodSupplyChain deployed to ${FoodSupplyChain.target}`);
   console.log(`Manufacturer deployed to ${manufacturer.target}`);
   console.log(`Distributor deployed to ${distributor.target}`);
-  console.log(`Pharmacy to deployed ${pharmacy.target}`);
+  console.log(`Foodto deployed ${Food.target}`);
   console.log(`Consumer to deployed ${consumer.target}`);
 
 
   const WAIT_BLOCK_CONFIRMATION = 4;
-  await medicineToken.deployTransaction.wait(WAIT_BLOCK_CONFIRMATION);
+  await FoodToken.deployTransaction.wait(WAIT_BLOCK_CONFIRMATION);
   await run("verify:verify", {
-    address:medicineToken.target,
+    address:FoodToken.target,
   });
   await run("verify:verify", {
-    address:medicineSupplyChain.target,
-    constructorArguments: [medicineToken.target],
+    address:FoodSupplyChain.target,
+    constructorArguments: [FoodToken.target],
   });
   await run("verify:verify", {
     address:manufacturer.target,
-    constructorArguments: [medicineSupplyChain.target],
+    constructorArguments: [FoodSupplyChain.target],
   });
   await run("verify:verify", {
     address:distributor.target,
-    constructorArguments: [medicineSupplyChain.target],
+    constructorArguments: [FoodSupplyChain.target],
   });
   await run("verify:verify", {
-    address:pharmacy.target,
-    constructorArguments: [medicineSupplyChain.target],
+    address:Food.target,
+    constructorArguments: [FoodSupplyChain.target],
   });
   await run("verify:verify", {
     address:consumer.target,
-    constructorArguments: [medicineSupplyChain.target],
+    constructorArguments: [FoodSupplyChain.target],
   });
   console.log("Contract Verified:");
 
